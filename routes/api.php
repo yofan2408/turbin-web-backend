@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +21,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('/login', [AuthController::class, 'login']);
-        Route::post('/register', [AuthController::class, 'register']);
-        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::put('/update', [UserController::class, 'update']);
+        Route::put('/photo', [UserController::class, 'updatePhoto']);
+        Route::get('/photo', [UserController::class, 'getPhoto']);
     });
 });

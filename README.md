@@ -9,6 +9,7 @@
 -   Endpoint: '/api/admin/register'
 -   Header:
     -   Accept: application/json
+    -   Content-Type: application/json
 
 ```json
 {
@@ -30,6 +31,7 @@
             "user" : [
                 "id" : "user id",
                 "name": "user name",
+                "email": "user email",
                 "address": "user address",
                 "phone": "user phone number",
                 "photo": "user photo",
@@ -55,6 +57,7 @@
 -   Endpoint: '/api/admin/login'
 -   Header:
     -   Accept: application/json
+    -   Content-Type: application/json
 
 ```json
 {
@@ -75,6 +78,7 @@
             "user" : [
                 "id" : "user id",
                 "name": "user name",
+                "email": "user email",
                 "address": "user address",
                 "phone": "user phone number",
                 "photo": "user photo",
@@ -101,7 +105,14 @@
 -   Header:
 
     -   Accept: application/json
+    -   Content-Type: application/json
     -   Bearer: token
+
+        ```json
+        {
+            "id": "user id"
+        }
+        ```
 
 -   Response
     -   Success
@@ -122,10 +133,11 @@
 ## Update Profile
 
 -   Request
--   Method : POST
+-   Method : PUT
 -   Endpoint: '/api/admin/update'
 -   Header:
     -   Accept: application/json
+    -   Content-Type: application/json
     -   Bearer: token
 
 ```json
@@ -147,6 +159,7 @@
            "user" : [
                "id" : "user id",
                "name": "user name",
+               "email": "user email",
                "address": "user address",
                "phone": "user phone number",
                "photo": "user photo",
@@ -161,6 +174,73 @@
         ```json
         {
             "code": 400,
-            "pesan": "Logout Failed"
+            "pesan": "Update Failed"
+        }
+        ```
+
+## Update Photo
+
+-   Request
+-   Method : PUT
+-   Endpoint: '/api/admin/photo'
+-   Header:
+    -   Accept: application/json
+    -   Content-Type: application/json
+    -   Bearer: token
+
+```json
+{
+    "photo": "url photo"
+}
+```
+
+-   Response
+
+    -   Success
+
+        ```json
+        {
+            "code": 200,
+            "pesan": "Update photo Success",
+            "photoUrl": "photo url"
+        }
+        ```
+
+    -   Failed
+        ```json
+        {
+            "code": 400,
+            "pesan": "Update Photo Failed"
+        }
+        ```
+
+## Get Photo
+
+-   Request
+-   Method : GET
+-   Endpoint: '/api/admin/photo'
+-   Header:
+    -   Accept: application/json
+    -   Content-Type: application/json
+    -   Bearer: token
+
+
+-   Response
+
+    -   Success
+
+        ```json
+        {
+            "code": 200,
+            "pesan": "Get photo Success",
+            "photoUrl": "photo url"
+        }
+        ```
+
+    -   Failed
+        ```json
+        {
+            "code": 400,
+            "pesan": "Get Photo Failed"
         }
         ```
