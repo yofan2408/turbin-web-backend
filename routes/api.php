@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ArticleController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,16 @@ Route::prefix('admin')->group(function () {
         Route::put('/photo', [UserController::class, 'updatePhoto']);
         Route::get('/photo', [UserController::class, 'getPhoto']);
     });
+
+    // * Article Route
+    Route::prefix('article')->group(function () {
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/', [ArticleController::class, 'insert']);
+            Route::put('/', [ArticleController::class, 'update']);
+            Route::delete('/', [ArticleController::class, 'delete']);
+        });
+    });
 });
+
+Route::get('/article', [ArticleController::class, 'getArticleById']);
+Route::get('/articles', [ArticleController::class, 'getArticles']);
